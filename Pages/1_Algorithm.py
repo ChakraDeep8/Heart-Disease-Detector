@@ -61,7 +61,7 @@ for col in encode:
     df = pd.concat([df, dummy], axis=1)
     del df[col]
 df = df[:1]  # Selects only the first row (the user input data)
-var = df.loc[:, ~df.columns.duplicated()]
+df.loc[:, ~df.columns.duplicated()]
 
 if Home.uploaded_file is not None:
     st.write(df)
