@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import classifier_model_builder as cmb
-import pickle
 import numpy as np
 import Home
 
@@ -62,7 +61,7 @@ for col in encode:
     df = pd.concat([df, dummy], axis=1)
     del df[col]
 df = df[:1]  # Selects only the first row (the user input data)
-df.loc[:, ~df.columns.duplicated()]
+var = df.loc[:, ~df.columns.duplicated()]
 
 if Home.uploaded_file is not None:
     st.write(df)
