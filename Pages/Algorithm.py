@@ -3,27 +3,24 @@ import pandas as pd
 import classifier_model_builder as cmb
 import pickle
 import numpy as np
-
-st.set_page_config(
-    page_title="Heart Disease Detector",
-    page_icon="❤"
-)
+import Home
 
 st.write("""
-# Heart Disease Prediction App
+<p style='font-size:60px;'><b>Algorithm Analysis</b></p>
 
-This app predicts whether a person have any heart disease or not
+<b>Here we analyze all the algorithms and determine the best algorithm</b>
 
-""")
+""", unsafe_allow_html=True)
 
 st.sidebar.header('User Input Features')
 st.sidebar.markdown("""
 [Example CSV input file]""")
 
-uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
+option = st.sidebar.selectbox("Select an Algorithm", ("Naive Bayes", "KNN", "Decision Tree"))
 
-if uploaded_file is not None:
-    input_df = pd.read_csv(uploaded_file)
+# Call the corresponding function based on the selected option
+if Home.uploaded_file is not None:
+    input_df = pd.read_csv(Home.uploaded_file)
 else:
     def patient_details():
         sex = st.sidebar.selectbox('Sex', ('M', 'F'))
@@ -56,7 +53,7 @@ else:
 
     input_df = patient_details()
 
-heart_disease_raw = pd.read_csv('res/heart.csv')
+heart_disease_raw = Home.heart_disease_raw
 heart = heart_disease_raw.drop(columns=['HeartDisease'])
 df = pd.concat([input_df, heart], axis=0)
 
@@ -69,7 +66,7 @@ for col in encode:
 df = df[:1]  # Selects only the first row (the user input data)
 df.loc[:, ~df.columns.duplicated()]
 
-if uploaded_file is not None:
+if Home.uploaded_file is not None:
     st.write(df)
 else:
     st.write('Awaiting CSV file to be uploaded. Currently using example input parameters (shown below).')
@@ -77,9 +74,9 @@ else:
     st.write(df)
 
 # Load the classification models
-load_clf_NB = pickle.load(open('res/heart_disease_classifier_NB.pkl', 'rb'))
-load_clf_knn = pickle.load(open('res/heart_disease_classifier_KNN.pkl', 'rb'))
-load_clf_DT = pickle.load(open('res/heart_disease_classifier_DT.pkl', 'rb'))
+load_clf_NB = Home.load_clf_NB
+load_clf_knn = Home.load_clf_knn
+load_clf_DT = Home.load_clf_DT
 
 # Apply models to make predictions
 prediction_NB = load_clf_NB.predict(df)
@@ -94,9 +91,9 @@ def NB():
     st.subheader('Naive Bayes Prediction')
     NB_prediction = np.array([0, 1])
     if NB_prediction[prediction_NB] == 1:
-        st.write("<p style='font-size:20px;color: yellow'>Heart Disease Detected.</p>", unsafe_allow_html=True)
+        st.write("<p style='font-size:20px;color': yellow'>Heart Disease Detected.</p>", unsafe_allow_html=True)
     else:
-        st.write("<p style='font-size:20px;color: green'>You are fine.</p>", unsafe_allow_html=True)
+        st.write("<p style='font-size:20px;color': green'>You are fine.</p>", unsafe_allow_html=True)
     st.subheader('Naive Bayes Prediction Probability')
     st.write(prediction_proba_NB)
     cmb.plt_NB()
@@ -108,7 +105,7 @@ def KNN():
     if knn_prediction[prediction_knn] == 1:
         st.write("<p style='font-size:20px;color: yellow'>Heart Disease Detected.</p>", unsafe_allow_html=True)
     else:
-        st.write("You are fine.")
+        st.write("<p style='font-size:20px;color: green'>You are fine.</p>", unsafe_allow_html=True)
     st.subheader('KNN Prediction Probability')
     st.write(prediction_proba_knn)
     cmb.plt_KNN()
@@ -120,7 +117,7 @@ def DT():
     if DT_prediction[prediction_DT] == 1:
         st.write("<p style='font-size:20px; color: yellow'>Heart Disease Detected.</p>", unsafe_allow_html=True)
     else:
-        st.write("You are fine.")
+        st.write("<p style='font-size:20px;color: green'>You are fine.</p>", unsafe_allow_html=True)
     st.subheader('Decision Tree Prediction Probability')
     st.write(prediction_proba_DT)
     cmb.plt_DT()
@@ -140,6 +137,7 @@ def select_best_algorithm():
 
     # Display the results
     st.write("<p style='font-size:24px;'>Best Algorithm: {}</p>".format(best_algorithm), unsafe_allow_html=True)
+    st.write("<p style='font-size:24px;'>Accuracy: {:.2f}%</p>".format(best_accuracy * 100), unsafe_allow_html=True)
 
 
 def predict_best_algorithm():
@@ -148,18 +146,19 @@ def predict_best_algorithm():
     DT_prediction = np.array([0, 1])
     if NB_prediction[prediction_NB] == 1:
         st.write("<p style='font-size:20px;color: yellow'>Heart Disease Detected.</p>", unsafe_allow_html=True)
-        cmb.plt_NB()
     elif knn_prediction[prediction_knn] == 1:
         st.write("<p style='font-size:20px;color: yellow'>Heart Disease Detected.</p>", unsafe_allow_html=True)
-        cmb.plt_KNN()
     elif NB_prediction[prediction_NB] == 1:
         st.write("<p style='font-size:20px;color: yellow'>Heart Disease Detected.</p>", unsafe_allow_html=True)
-        cmb.plt_DT()
     else:
-        st.write("You are fine.")
+        st.write("<p style='font-size:20px;color: green'>You are fine.</p>", unsafe_allow_html=True)
 
 
 # Displays the user input features
-st.subheader('Patient Report')
-select_best_algorithm()
-predict_best_algorithm()
+st.write("<p style='font-size:50px;'><b>Detailed Analysis</b></p>", unsafe_allow_html=True)
+if option == "Naive Bayes":
+    NB()
+elif option == "KNN":
+    KNN()
+elif option == "Decision Tree":
+    DT()

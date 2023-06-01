@@ -9,7 +9,7 @@ import pickle
 from sklearn.metrics import confusion_matrix, accuracy_score
 import matplotlib.pyplot as plt
 
-ht = pd.read_csv('heart.csv')
+ht = pd.read_csv('res/heart.csv')
 
 # Ordinal feature encoding
 # https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction
@@ -137,6 +137,6 @@ def plt_DT():
 
 
 # Saving the model
-pickle.dump(nb_classifier, open('heart_disease_classifier_NB.pkl', 'wb'))
-pickle.dump(knn_classifier, open('heart_disease_classifier_KNN.pkl', 'wb'))
-pickle.dump(dt_classifier, open('heart_disease_classifier_DT.pkl', 'wb'))
+pickle.dump(nb_classifier, open('res/heart_disease_classifier_NB.pkl', 'wb'))
+pickle.dump(knn_classifier, open('res/heart_disease_classifier_KNN.pkl', 'wb'))
+pickle.dump(dt_classifier, open('res/heart_disease_classifier_DT.pkl', 'wb'))
