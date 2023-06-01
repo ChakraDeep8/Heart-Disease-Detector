@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 ht = pd.read_csv('res/heart.csv')
 
 # Ordinal feature encoding
-# https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction
+
 df = ht.copy()
 encode = ['Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina', 'ST_Slope']
 

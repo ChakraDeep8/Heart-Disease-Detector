@@ -7,9 +7,7 @@ import Home
 
 st.write("""
 <p style='font-size:60px;'><b>Algorithm Analysis</b></p>
-
 <b>Here we analyze all the algorithms and determine the best algorithm</b>
-
 """, unsafe_allow_html=True)
 
 st.sidebar.header('User Input Features')
