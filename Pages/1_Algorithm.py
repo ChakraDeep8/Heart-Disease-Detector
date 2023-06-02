@@ -12,12 +12,12 @@ st.write("""
 st.sidebar.header('User Input Features')
 st.sidebar.markdown("""
 [Example CSV input file]""")
-
+uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
 option = st.sidebar.selectbox("Select an Algorithm", ("Naive Bayes", "KNN", "Decision Tree"))
 
 # Call the corresponding function based on the selected option
-if Home.uploaded_file is not None:
-    input_df = pd.read_csv(Home.uploaded_file)
+if uploaded_file is not None:
+    input_df = pd.read_csv(uploaded_file)
 else:
     def patient_details():
         sex = st.sidebar.selectbox('Sex', ('M', 'F'))

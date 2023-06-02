@@ -39,6 +39,7 @@ nb_predictions = nb_classifier.predict(X_test)
 nb_cm = confusion_matrix(y_test, nb_predictions)
 nb_accuracy = accuracy_score(y_test, nb_predictions)
 
+
 def plt_NB():
     def accuracy():
         st.write("<p style='font-size:24px;'>Accuracy (Naive Bayes): {:.2f}%</p>".format(nb_accuracy * 100),
@@ -72,6 +73,7 @@ knn_classifier.fit(X_train, y_train)
 # Predict using the K-Nearest Neighbors classifier
 knn_predictions = knn_classifier.predict(X_test)
 knn_accuracy = accuracy_score(y_test, knn_predictions)
+
 
 def plt_KNN():
     def accuracy():
