@@ -145,7 +145,7 @@ def predict_best_algorithm():
         st.write("<p style='font-size:20px;color: yellow'>Heart Disease Detected.</p>", unsafe_allow_html=True)
     elif knn_prediction[prediction_knn] == 1:
         st.write("<p style='font-size:20px;color: yellow'>Heart Disease Detected.</p>", unsafe_allow_html=True)
-    elif NB_prediction[prediction_NB] == 1:
+    elif DT_prediction[prediction_DT] == 1:
         st.write("<p style='font-size:20px;color: yellow'>Heart Disease Detected.</p>", unsafe_allow_html=True)
     else:
         st.write("<p style='font-size:20px;color: green'>You are fine.</p>", unsafe_allow_html=True)
