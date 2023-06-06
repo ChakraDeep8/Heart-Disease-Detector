@@ -88,9 +88,9 @@ def NB():
     st.subheader('Naive Bayes Prediction')
     NB_prediction = np.array([0, 1])
     if NB_prediction[prediction_NB] == 1:
-        st.write("<p style='font-size:20px;color': yellow'>Heart Disease Detected.</p>", unsafe_allow_html=True)
+        st.write("<p style='font-size:20px;color': orange'><b>Heart Disease Detected.</b></p>", unsafe_allow_html=True)
     else:
-        st.write("<p style='font-size:20px;color': green'>You are fine.</p>", unsafe_allow_html=True)
+        st.write("<p style='font-size:20px;color': green'><b>You are fine.</b></p>", unsafe_allow_html=True)
     st.subheader('Naive Bayes Prediction Probability')
     st.write(prediction_proba_NB)
     cmb.plt_NB()
@@ -100,9 +100,9 @@ def KNN():
     st.subheader('K-Nearest Neighbour Prediction')
     knn_prediction = np.array([0, 1])
     if knn_prediction[prediction_knn] == 1:
-        st.write("<p style='font-size:20px;color: yellow'>Heart Disease Detected.</p>", unsafe_allow_html=True)
+        st.write("<p style='font-size:20px;color: orange'><b>Heart Disease Detected.</b></p>", unsafe_allow_html=True)
     else:
-        st.write("<p style='font-size:20px;color: green'>You are fine.</p>", unsafe_allow_html=True)
+        st.write("<p style='font-size:20px;color: green'><b>You are fine.</b></p>", unsafe_allow_html=True)
     st.subheader('KNN Prediction Probability')
     st.write(prediction_proba_knn)
     cmb.plt_KNN()
@@ -112,9 +112,9 @@ def DT():
     st.subheader('Decision Tree Prediction')
     DT_prediction = np.array([0, 1])
     if DT_prediction[prediction_DT] == 1:
-        st.write("<p style='font-size:20px; color: yellow'>Heart Disease Detected.</p>", unsafe_allow_html=True)
+        st.write("<p style='font-size:20px; color: orange'><b>Heart Disease Detected.</b></p>", unsafe_allow_html=True)
     else:
-        st.write("<p style='font-size:20px;color: green'>You are fine.</p>", unsafe_allow_html=True)
+        st.write("<p style='font-size:20px;color: green'><b>You are fine.</b></p>", unsafe_allow_html=True)
     st.subheader('Decision Tree Prediction Probability')
     st.write(prediction_proba_DT)
     cmb.plt_DT()
@@ -142,13 +142,13 @@ def predict_best_algorithm():
     knn_prediction = np.array([0, 1])
     DT_prediction = np.array([0, 1])
     if NB_prediction[prediction_NB] == 1:
-        st.write("<p style='font-size:20px;color: yellow'>Heart Disease Detected.</p>", unsafe_allow_html=True)
+        st.write("<p style='font-size:20px;color: orange'><b>Heart Disease Detected.</b></p>", unsafe_allow_html=True)
     elif knn_prediction[prediction_knn] == 1:
-        st.write("<p style='font-size:20px;color: yellow'>Heart Disease Detected.</p>", unsafe_allow_html=True)
+        st.write("<p style='font-size:20px;color: orange'><b>Heart Disease Detected.</b></p>", unsafe_allow_html=True)
     elif DT_prediction[prediction_DT] == 1:
-        st.write("<p style='font-size:20px;color: yellow'>Heart Disease Detected.</p>", unsafe_allow_html=True)
+        st.write("<p style='font-size:20px;color: orange'><b>Heart Disease Detected.</b></p>", unsafe_allow_html=True)
     else:
-        st.write("<p style='font-size:20px;color: green'>You are fine.</p>", unsafe_allow_html=True)
+        st.write("<p style='font-size:20px;color: green'><b>You are fine.</b></p>", unsafe_allow_html=True)
 
 
 # Displays the user input features
